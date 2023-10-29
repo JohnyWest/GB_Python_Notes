@@ -13,3 +13,24 @@ def load_notes():
         return notes
     except FileNotFoundError:
         return[]
+
+#Создание заметки
+def create_note():
+    notes = load_notes()
+    title = input("Введите название заметки:")
+    body = input("Введите текст заметки:")
+    note = {
+        "id":len(notes) + 1,
+        "title":title,
+        "body":body,
+        "created_at":get_current_datetime(),
+        "updated_at":get_current_datetime(),
+    }
+    notes.append(note)
+    #save_notes
+    print("Заметка создана")
+
+#Сохранние заметки
+def save_notes(notes):
+    with open("notes.json", "w") as file:
+        json.dump(notes, file, indent=4)
