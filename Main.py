@@ -34,3 +34,25 @@ def create_note():
 def save_notes(notes):
     with open("notes.json", "w") as file:
         json.dump(notes, file, indent=4)
+
+#Основной метод
+def main():
+    while True:
+        print("1. Создание заметки")
+        print("2. Загрузить заметки")
+        print("3. Сохранение заметки")
+
+        choice = input("Выберите действие: ")
+        if choice == "1":
+            create_note()
+            print("Вы выбрали создать заметку")
+        elif choice == "2":
+            load_notes()
+            print("Вы выбрали загрузить заметку")
+#TO DO: Тут короче подумать как лучше сделать методы
+        break
+    else:
+        print("Конец, выход в elif")
+
+if __name__ == "__main__":
+    main()
