@@ -19,6 +19,15 @@ def update_note_id():
     notes = load_notes()
     for i in range(len(notes)):
             notes[i]["id"] = i + 1
+
+# Фикс создания новых заметок с ID последней заметки
+def get_max_note_id():
+    max_id = 0
+    notes = load_notes()
+    for note in notes:
+        if note['id'] > max_id:
+             max_id = note['id']
+    return max_id
     
 #Сохранение заметки
 def save_notes(notes):
@@ -30,8 +39,9 @@ def create_note():
     notes = load_notes()
     title = input("Введите название заметки:")
     body = input("Введите текст заметки:")
+    max_id = get_max_note_id()
     note = {
-        "id":len(notes) + 1,
+        "id": max_id + 1,
         "title":title,
         "body":body,
         "created_at":get_current_datetime(),
@@ -55,6 +65,22 @@ def show_notes():
             print("____________________________________")
     else:
         print("Заметок пока нет.")
+
+# Чтение заметки
+def read_note():
+    notes = load_notes()
+    note_id = int(input("Введите ID заметки, которую хотите прочитать: "))
+    found = False
+    for note in notes:
+        if note["id"] == note_id:
+            print(note['body'])
+            found = True
+            break
+    if found:
+        print("===Конец заметки===")
+    else:
+        print("Заметка с таким ID отсутствует")
+
 
 # Редактирование заметки
 def edit_note():
@@ -100,6 +126,7 @@ def main():
         print("2. Показать все заметки")
         print("3. Редактирование заметки")
         print("4. Удаление заметки")
+        print("5. Чтение заметки")
         print("0. Выйти из приложения")
 
         choice = input("Выберите действие: ")
@@ -111,6 +138,8 @@ def main():
             edit_note()
         elif choice == "4":
             delete_note()
+        elif choice == "5":
+            read_note()
         elif choice == "0":
             print("Выход из приложения")
             break
