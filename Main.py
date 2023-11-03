@@ -14,6 +14,12 @@ def load_notes():
     except FileNotFoundError:
         return[]
     
+#Фикс ID удалённых заметок
+def update_note_id():
+    notes = load_notes()
+    for i in range(len(notes)):
+            notes[i]["id"] = i + 1
+    
 #Сохранение заметки
 def save_notes(notes):
     with open("notes.json", "w") as file:
@@ -64,10 +70,10 @@ def edit_note():
             note["updated_at"] = get_current_datetime()
             found = True
             break
-        if found:
+    if found:
             save_notes(notes)
             print("Заметка успешно изменена")
-        else:
+    else:
             print("Заметка с таким ID отсутствует")
 
 #Удаление заметки
@@ -80,10 +86,11 @@ def delete_note():
             notes.remove(note)
             found = True
             break
-        if found:
+    if found:
+            update_note_id()
             save_notes(notes)
             print("Заметка успешно удалена")
-        else:
+    else:
             print("Заметка с таким ID не найдена.")
 
 #Основной метод
