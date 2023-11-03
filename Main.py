@@ -100,17 +100,22 @@ def main():
             print("Вы выбрали создать заметку")
             create_note()
         elif choice == "2":
-            print("Вы выбрали загрузить заметку")
-            load_notes()
+            print("Вы выбрали показать все заметки")
+            show_notes()
         elif choice == "3":
             print("Вы выбрали сохранить заметку")
             save_notes()
         elif choice == "4":
-            
-#TO DO: Тут короче подумать как лучше сделать методы
-        break
-    else:
-        print("Ошибка, неверный выбор")
+            print("Вы выбрали редактировать заметку")
+            edit_note()
+        elif choice == "5":
+            print("Вы выбрали удалить заметку")
+            delete_note()
+        elif choice == "0":
+            print("Выход из приложения")
+            break
+        else:
+            print("Неверный выбор, попробуйте ещё раз")
 
 if __name__ == "__main__":
     main()
