@@ -49,6 +49,28 @@ def show_notes():
     else:
         print("Заметок пока нет.")
 
+def edit_note():
+    notes = load_notes()
+    note_id = int(input("Введите ID заметки для редактирования: "))
+    found = False
+    for note in notes:
+        if note["id"] == note_id:
+            title = input("Введите новый заголовок заметки: ")
+            body = input("Введите новый текст заметки:")
+            note["title"] = title
+            note["body"] = body
+            note["updated_at"] = get_current_datetime()
+            found = True
+            break
+        if found:
+            save_notes(notes)
+            print("Заметка успешно изменена")
+        else:
+            print("Заметка с таким ID отсутствует")
+
+#Удаление заметки
+
+
 #Основной метод
 def main():
     while True:
@@ -58,7 +80,7 @@ def main():
         print("4. Редактирование заметки")
         print("5. Удаление заметки")
         print("0. Выйти из приложения")
-        
+
         choice = input("Выберите действие: ")
         if choice == "1":
             print("Вы выбрали создать заметку")
