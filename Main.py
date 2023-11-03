@@ -30,7 +30,7 @@ def create_note():
     save_notes (notes)
     print("Заметка создана")
 
-#Сохранние заметки
+#Сохранение заметки
 def save_notes(notes):
     with open("notes.json", "w") as file:
         json.dump(notes, file, indent=4)
@@ -49,6 +49,7 @@ def show_notes():
     else:
         print("Заметок пока нет.")
 
+# Редактирование заметки
 def edit_note():
     notes = load_notes()
     note_id = int(input("Введите ID заметки для редактирования: "))
@@ -69,7 +70,20 @@ def edit_note():
             print("Заметка с таким ID отсутствует")
 
 #Удаление заметки
-
+def delete_note():
+    notes = load_notes()
+    note_id = int(input("ВВедите ID заметки для удаления: "))
+    found = False
+    for note in notes:
+        if note["id"] == note_id:
+            notes.remove(note)
+            found = True
+            break
+        if found:
+            save_notes(notes)
+            print("Заметка успешно удалена")
+        else:
+            print("Заметка с таким ID не найдена.")
 
 #Основной метод
 def main():
@@ -88,10 +102,15 @@ def main():
         elif choice == "2":
             print("Вы выбрали загрузить заметку")
             load_notes()
+        elif choice == "3":
+            print("Вы выбрали сохранить заметку")
+            save_notes()
+        elif choice == "4":
+            
 #TO DO: Тут короче подумать как лучше сделать методы
         break
     else:
-        print("Конец, выход в elif")
+        print("Ошибка, неверный выбор")
 
 if __name__ == "__main__":
     main()
