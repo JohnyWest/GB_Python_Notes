@@ -13,6 +13,11 @@ def load_notes():
         return notes
     except FileNotFoundError:
         return[]
+    
+#Сохранение заметки
+def save_notes(notes):
+    with open("notes.json", "w") as file:
+        json.dump(notes, file, indent=4)
 
 #Создание заметки
 def create_note():
@@ -30,10 +35,6 @@ def create_note():
     save_notes (notes)
     print("Заметка создана")
 
-#Сохранение заметки
-def save_notes(notes):
-    with open("notes.json", "w") as file:
-        json.dump(notes, file, indent=4)
 
 #ВЫвод всех заметок
 def show_notes():
@@ -90,26 +91,18 @@ def main():
     while True:
         print("1. Создание заметки")
         print("2. Показать все заметки")
-        print("3. Сохранение заметки")
-        print("4. Редактирование заметки")
-        print("5. Удаление заметки")
+        print("3. Редактирование заметки")
+        print("4. Удаление заметки")
         print("0. Выйти из приложения")
 
         choice = input("Выберите действие: ")
         if choice == "1":
-            print("Вы выбрали создать заметку")
             create_note()
         elif choice == "2":
-            print("Вы выбрали показать все заметки")
             show_notes()
         elif choice == "3":
-            print("Вы выбрали сохранить заметку")
-            save_notes()
-        elif choice == "4":
-            print("Вы выбрали редактировать заметку")
             edit_note()
-        elif choice == "5":
-            print("Вы выбрали удалить заметку")
+        elif choice == "4":
             delete_note()
         elif choice == "0":
             print("Выход из приложения")
